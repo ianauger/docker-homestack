@@ -12,6 +12,8 @@ services:
       - /mnt/storage/piwigo:/config
     ports:
       - 3005:80
+    networks:
+      - homestack
     restart: unless-stopped
   grocy:
     image: linuxserver/grocy
@@ -24,6 +26,8 @@ services:
       - /mnt/storage/grocy:/config
     ports:
       - 3006:80
+    networks:
+      - homestack
     restart: unless-stopped
   lazy-librarian:
     image: linuxserver/lazylibrarian
@@ -38,6 +42,8 @@ services:
       - /mnt/storage/lazy_librarian/books:/books
     ports:
       - 3007:5299
+    networks:
+      - homestack
     restart: unless-stopped
   deluge:
     image: linuxserver/deluge
@@ -59,5 +65,8 @@ services:
       - 3009:443
     volumes:
       - /mnt/storage/dokuwiki:/bitnami
+    networks:
+      - homestack
     restart: unless-stopped
-
+networks:
+  homestack:
