@@ -1,0 +1,63 @@
+---
+version: "2"
+services:
+  piwigo:
+    image: linuxserver/piwigo
+    container_name: piwigo
+    environment:
+      - PUID=1000
+      - GUID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/storage/piwigo:/config
+    ports:
+      - 3005:80
+    restart: unless-stopped
+  grocy:
+    image: linuxserver/grocy
+    container_name: grocy
+    environment:
+      - PUID=1000
+      - GUID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/storage/grocy:/config
+    ports:
+      - 3006:80
+    restart: unless-stopped
+  lazy-librarian:
+    image: linuxserver/lazy-librarian
+    container_name: lazy-librarian
+    environment:
+      - PUID=1000
+      - GUID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/storage/lazy_librarian/data:/config
+      - /mnt/storage/lazy_librarian/downloads:/downloads
+      - /mnt/storage/lazy_librarian/books:/books
+    ports:
+      - 3007:5299
+    restart: unless-stopped
+  deluge:
+    image: linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    environment:
+      - PUID=1000
+      - GUID=1000
+      - UMASK_SET=<022>
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/storage/deluge/config:/config
+      - /mnt/storage/deluge/downloads:/downloads
+    restart: unless-stopped
+  dokuwiki:
+    image: bitnami/dokuwiki
+    ports:
+      - 3008:80
+      - 3009:443
+    volumes:
+      - /mnt/storage/dokuwiki:/bitnami
+    restart: unless-stopped
+
