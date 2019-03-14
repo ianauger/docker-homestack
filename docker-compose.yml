@@ -60,6 +60,7 @@ services:
     restart: unless-stopped
   dokuwiki:
     image: bitnami/dokuwiki
+    container_name: dokuwiki
     ports:
       - 3008:80
       - 3009:443
@@ -68,5 +69,20 @@ services:
     networks:
       - homestack
     restart: unless-stopped
+  tt-rss:
+    image: linuxserver/tt-rss
+    container_name: tt-rss
+    environment:
+      - PUID=1000
+      - GUID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/storage/tt-rss:/config
+    ports:
+      - 3010:80
+    networks:
+      - homestack
+    restart: unless-stopped
+
 networks:
   homestack:
