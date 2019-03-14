@@ -58,17 +58,6 @@ services:
       - /mnt/storage/deluge/config:/config
       - /mnt/storage/deluge/downloads:/downloads
     restart: unless-stopped
-  dokuwiki:
-    image: bitnami/dokuwiki
-    container_name: dokuwiki
-    ports:
-      - 3008:80
-      - 3009:443
-    volumes:
-      - /mnt/storage/dokuwiki:/bitnami
-    networks:
-      - homestack
-    restart: unless-stopped
   tt-rss:
     image: linuxserver/tt-rss
     container_name: tt-rss
