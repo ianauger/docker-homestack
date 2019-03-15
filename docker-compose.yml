@@ -75,7 +75,6 @@ services:
   tt-db:
     image: hypriot/rpi-mysql
     container_name: tt-db
-    user: 1001:1001
     environment:
       - MYSQL_ROOT_PASSWORD=thisisuttergarbo
       - MYSQL_DATABASE=ttrss
@@ -85,6 +84,21 @@ services:
       - /mnt/storage/mysql/tt-db:/var/lib/mysql
     ports:
       - 3011:3306
+    networks:
+      - homestack
+    restart: unless-stopped
+  piwigo-db:
+    image: hypriot/rpi-mysql
+    container_name: piwigo-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=thisisuttergarbo
+      - MYSQL_DATABASE=piwigo
+      - MYSQL_USER=piwigo_user
+      - MYSQL_PASSWORD=piwigodbpassword
+    volumes:
+      - /mnt/storage/mysql/tt-db:/var/lib/mysql
+    ports:
+      - 3012:3306
     networks:
       - homestack
     restart: unless-stopped
