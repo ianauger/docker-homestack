@@ -72,6 +72,22 @@ services:
     networks:
       - homestack
     restart: unless-stopped
+  tt-db:
+    image: hypriot/rpi-mysql
+    container_name: tt-db
+    user: 1000:1000
+    environment:
+      - MYSQL_ROOT_PASSWORD=thisisuttergarbo
+      - MYSQL_DATABASE=ttrss
+      - MYSQL_USER=ttrss_user
+      - MYSQL_PASSWORD=ttrsspassword
+    volumes:
+      - /mnt/storage/mysql/tt-db:/var/lib/mysql
+    ports:
+      - 3011:3306
+    networks:
+      - homestack
+    restart: unless-stopped
 
 networks:
   homestack:
