@@ -75,7 +75,7 @@ services:
   tt-db:
     image: hypriot/rpi-mysql
     container_name: tt-db
-    user: 1000:1000
+    user: 1001:1001
     environment:
       - MYSQL_ROOT_PASSWORD=thisisuttergarbo
       - MYSQL_DATABASE=ttrss
