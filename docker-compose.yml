@@ -96,7 +96,7 @@ services:
       - MYSQL_USER=piwigo_user
       - MYSQL_PASSWORD=piwigodbpassword
     volumes:
-      - /mnt/storage/mysql/tt-db:/var/lib/mysql
+      - /mnt/storage/mysql/piwigo-db:/var/lib/mysql
     ports:
       - 3012:3306
     networks:
