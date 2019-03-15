@@ -72,6 +72,20 @@ services:
     networks:
       - homestack
     restart: unless-stopped
+  dokuwiki:
+    image: jesnor/rpi-dokuwiki
+    container_name: dokuwiki
+    volumes:
+      - /mnt/storage/dokuwiki/data:/dokuwiki/data
+      - /mnt/storage/dokuwiki/conf:/dokuwiki/conf
+      - /mnt/storage/dokuwiki/lib/plugins:/dokuwiki/lib/plugins
+      - /mnt/storage/dokuwiki/lib/tpl:/dokuwiki/lib/tpl
+      - /mnt/storage/dokuwiki/logs:/var/log
+    ports:
+      - 3011:80
+    networks:
+      - homestack
+    restart: unless-stopped
 
 networks:
   homestack:
