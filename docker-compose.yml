@@ -15,6 +15,7 @@ services:
     networks:
       - homestack
     restart: unless-stopped
+    depends_on: piwigo-db
   grocy:
     image: linuxserver/grocy
     container_name: grocy
@@ -72,6 +73,7 @@ services:
     networks:
       - homestack
     restart: unless-stopped
+    depends_on: tt-db
   tt-db:
     image: hypriot/rpi-mysql
     container_name: tt-db
