@@ -74,6 +74,21 @@ services:
       - homestack
     restart: unless-stopped
     depends_on: tt-db
+  heimdall:
+    image: linuxserver/heimdall
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - GUID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /mnt/storage/heimdall:/config
+    ports:
+      - 3013:80
+      - 3014:443
+    networks:
+      - homestack
+    restart: unless-stopped
   tt-db:
     image: hypriot/rpi-mysql
     container_name: tt-db
