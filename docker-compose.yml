@@ -91,6 +91,32 @@ services:
     networks:
       - homestack
     restart: unless-stopped
+  pihole:
+    image: pihole/pihole
+    container_name: pihole
+    environment:
+      - TZ=America/Los_Angeles
+      - DNS1=1.1.1.1
+      - DNS2=1.0.0.1
+      - ServerIP=192.168.10.75
+      - VIRTUAL_HOST=pihole.ct.net
+    volumes:
+      - /mnt/storage/pihole/pihole:/etc/pihole/
+      - /mnt/storage/pihole/dnsmasq:/etc/dnsmasq.d/
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+      - 80:80/tcp
+      - 443:443/tcp
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - homestack
+    restart: unless-stopped
   tt-db:
     image: hypriot/rpi-mysql
     container_name: tt-db
